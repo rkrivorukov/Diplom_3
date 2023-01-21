@@ -5,6 +5,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RegistrationPage {
     private WebDriver driver;
+    private WebDriverWait wait;
     private By nameField = By.xpath("//label[text()='Имя']/following-sibling::input");
     private By emailField = By.xpath("//label[text()='Email']/following-sibling::input");
     private By passwordField = By.xpath("//input[@type='password']");
@@ -15,25 +16,22 @@ public class RegistrationPage {
 
     public RegistrationPage(WebDriver driver){
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, 10);
     }
     public void enterName(String name){
-//        driver.findElement(nameField).click();
-//        driver.findElement(nameField).clear();
+
         driver.findElement(nameField).sendKeys(name);
     }
     public void enterEmail(String email){
-//        driver.findElement(emailField).click();
-//        driver.findElement(emailField).clear();
         driver.findElement(emailField).sendKeys(email);
     }
     public void enterPassword(String password){
-//        driver.findElement(passwordField).click();
-//        driver.findElement(passwordField).clear();
         driver.findElement(passwordField).sendKeys(password);
     }
 
     public void clickRegistrationButton(){
         driver.findElement(registrationButton).click();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(registrationButton));
     }
 
     public void registration(String name, String email, String password){
@@ -50,7 +48,7 @@ public class RegistrationPage {
     public WebElement waitPasswordErrorVisible(String password){
         enterPassword(password);
         driver.findElement(emailField).click();
-        return new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(passwordError));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(passwordError));
     }
 
     public void scrollToLoginButton(){

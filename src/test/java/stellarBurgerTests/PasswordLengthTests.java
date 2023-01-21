@@ -1,5 +1,7 @@
 package stellarBurgerTests;
 
+import io.qameta.allure.Description;
+import org.junit.Before;
 import page.RegistrationPage;
 import page.LoginPage;
 import static org.junit.Assert.*;
@@ -15,11 +17,15 @@ public class PasswordLengthTests {
     private WebDriver driver;
     private final String shortPassword = "123";
 
-    @Test
-    @Step("Error of short password is visible at Chrome")
-    public void testVisibilityErrorOfShortPasswordChrome(){
+    @Before
+    public void setUp(){
+        System.setProperty("webdriver.chrome.driver","src/test/resources/yandexdriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+    @Test
+    @Description("Error of short password is visible at Chrome")
+    public void testVisibilityErrorOfShortPasswordChrome(){
         driver.get("https://stellarburgers.nomoreparties.site/");
         MainPage objMainPage = new MainPage(driver);
         objMainPage.clickEnterToAccountButton();
@@ -30,11 +36,8 @@ public class PasswordLengthTests {
     }
 
     @Test
-    @Step("Error of short password is visible at Yandex")
+    @Description("Error of short password is visible at Yandex")
     public void testVisibilityErrorOfShortPasswordYandex(){
-        System.setProperty("webdriver.chrome.driver","src/test/resources/yandexdriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://stellarburgers.nomoreparties.site/");
         MainPage objMainPage = new MainPage(driver);
         objMainPage.clickEnterToAccountButton();
@@ -45,7 +48,6 @@ public class PasswordLengthTests {
     }
 
     @After
-    @Step("Quit browser")
     public void logOut(){
         driver.quit();
     }

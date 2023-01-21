@@ -1,4 +1,5 @@
 package page;
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 
 public class PersonalAccountPage {
@@ -13,12 +14,14 @@ public class PersonalAccountPage {
     public PersonalAccountPage(WebDriver driver){
         this.driver = driver;
     }
+    @Step
     public void clickConstructorButton(){
         driver.findElement(constructorButton).click();
     }
     public void clickStellarBurgersLogo(){
         driver.findElement(stellarBurgersLogo).click();
     }
+    @Step
     public void clickLogoutButton(){
         driver.findElement(logoutButton).click();
     }

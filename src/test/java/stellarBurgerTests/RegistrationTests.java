@@ -1,5 +1,6 @@
 package stellarBurgerTests;
 
+import io.qameta.allure.Description;
 import page.RegistrationPage;
 import page.LoginPage;
 import page.PersonalAccountPage;
@@ -20,7 +21,12 @@ public class RegistrationTests {
     private String email;
     private final String password = "autotest12345";
 
-
+    @Before
+    public void setUp(){
+        System.setProperty("webdriver.chrome.driver","src/test/resources/yandexdriver.exe");
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
     @Before
     @Step("Create random user data")
     public void createRegistrationData(){
@@ -30,10 +36,9 @@ public class RegistrationTests {
 
 
     @Test
-    @Step("Registration in Chrome")
+    @Description("Registration in Chrome")
     public void testRegistrationChrome() throws InterruptedException {
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         driver.get("https://stellarburgers.nomoreparties.site/");
         MainPage objMainPage = new MainPage(driver);
         objMainPage.clickEnterToAccountButton();
@@ -41,7 +46,6 @@ public class RegistrationTests {
         objLoginPage.clickRegistrationButton();
         RegistrationPage objRegistrationPage = new RegistrationPage(driver);
         objRegistrationPage.registration(name, email, password);
-        Thread.sleep(1000);
         objLoginPage.login(email, password);
         objMainPage.clickPersonalAccountButton();
         PersonalAccountPage objPersonalAccountPage = new PersonalAccountPage(driver);
@@ -53,11 +57,8 @@ public class RegistrationTests {
     }
 
     @Test
-    @Step("Registration in Yandex")
+    @Description("Registration in Yandex")
     public void testRegistrationYandex() throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver","src/test/resources/yandexdriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://stellarburgers.nomoreparties.site/");
         MainPage objMainPage = new MainPage(driver);
         objMainPage.clickEnterToAccountButton();
@@ -65,7 +66,6 @@ public class RegistrationTests {
         objLoginPage.clickRegistrationButton();
         RegistrationPage objRegistrationPage = new RegistrationPage(driver);
         objRegistrationPage.registration(name, email, password);
-        Thread.sleep(1000);
         objLoginPage.login(email, password);
         objMainPage.clickPersonalAccountButton();
         PersonalAccountPage objPersonalAccountPage = new PersonalAccountPage(driver);

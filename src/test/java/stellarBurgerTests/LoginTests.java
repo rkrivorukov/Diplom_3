@@ -1,5 +1,7 @@
 package stellarBurgerTests;
 
+import io.qameta.allure.Description;
+import org.junit.Before;
 import page.LoginPage;
 import page.RecoverPasswordPage;
 import page.RegistrationPage;
@@ -17,11 +19,16 @@ public class LoginTests {
     private final String email = "romankrivorukov@yandex.ru";
     private final String password = "roman1234";
 
-    @Test
-    @Step("Login via Personal Account button")
-    public void testLoginPersonalAccountButtonChrome(){
+
+    @Before
+    public void setUp(){
+        System.setProperty("webdriver.chrome.driver","src/test/resources/yandexdriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+    @Test
+    @Description("Login via Personal Account button")
+    public void testLoginPersonalAccountButtonChrome(){
         driver.get("https://stellarburgers.nomoreparties.site/");
         MainPage objMainPage = new MainPage(driver);
         objMainPage.clickPersonalAccountButton();
@@ -31,10 +38,8 @@ public class LoginTests {
     }
 
     @Test
-    @Step("Login via Enter account button")
+    @Description("Login via Enter account button")
     public void testLoginEnterAccountButtonChrome(){
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://stellarburgers.nomoreparties.site/");
         MainPage objMainPage = new MainPage(driver);
         objMainPage.clickEnterToAccountButton();
@@ -44,10 +49,8 @@ public class LoginTests {
     }
 
     @Test
-    @Step("Login via registration form")
+    @Description("Login via registration form")
     public void testLoginRegistrationFormChrome(){
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://stellarburgers.nomoreparties.site/register");
         RegistrationPage objRegistrationPage = new RegistrationPage(driver);
         objRegistrationPage.scrollToLoginButton();
@@ -59,10 +62,8 @@ public class LoginTests {
     }
 
     @Test
-    @Step("Login via recover password page")
+    @Description("Login via recover password page")
     public void testLoginRecoverPasswordPageChrome(){
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://stellarburgers.nomoreparties.site/forgot-password");
         RecoverPasswordPage objRecoverPasswordPage = new RecoverPasswordPage(driver);
         objRecoverPasswordPage.scrollToLoginButton();
@@ -74,11 +75,8 @@ public class LoginTests {
     }
 
     @Test
-    @Step("Login via Personal Account button")
+    @Description("Login via Personal Account button")
     public void testLoginPersonalAccountButtonYandex(){
-        System.setProperty("webdriver.chrome.driver","src/test/resources/yandexdriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://stellarburgers.nomoreparties.site/");
         MainPage objMainPage = new MainPage(driver);
         objMainPage.clickPersonalAccountButton();
@@ -88,11 +86,8 @@ public class LoginTests {
     }
 
     @Test
-    @Step("Login via Enter account button")
+    @Description("Login via Enter account button")
     public void testLoginEnterAccountButtonYandex(){
-        System.setProperty("webdriver.chrome.driver","src/test/resources/yandexdriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://stellarburgers.nomoreparties.site/");
         MainPage objMainPage = new MainPage(driver);
         objMainPage.clickEnterToAccountButton();
@@ -102,11 +97,8 @@ public class LoginTests {
     }
 
     @Test
-    @Step("Login via registration form")
+    @Description("Login via registration form")
     public void testLoginRegistrationFormYandex(){
-        System.setProperty("webdriver.chrome.driver","src/test/resources/yandexdriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://stellarburgers.nomoreparties.site/register");
         RegistrationPage objRegistrationPage = new RegistrationPage(driver);
         objRegistrationPage.scrollToLoginButton();
@@ -118,11 +110,8 @@ public class LoginTests {
     }
 
     @Test
-    @Step("Login via recover password page")
+    @Description("Login via recover password page")
     public void testLoginRecoverPasswordPageYandex(){
-        System.setProperty("webdriver.chrome.driver","src/test/resources/yandexdriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://stellarburgers.nomoreparties.site/forgot-password");
         RecoverPasswordPage objRecoverPasswordPage = new RecoverPasswordPage(driver);
         objRecoverPasswordPage.scrollToLoginButton();
@@ -134,7 +123,6 @@ public class LoginTests {
     }
 
     @After
-    @Step("Quit browser")
     public void logOut(){
         driver.quit();
     }

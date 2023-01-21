@@ -1,4 +1,6 @@
 package page;
+import com.google.errorprone.annotations.SuppressPackageLocation;
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,10 +23,12 @@ public class MainPage {
         this.driver = driver;
     }
 
+    @Step
     public void clickPersonalAccountButton(){
         driver.findElement(personalAccountButton).click();
     }
 
+    @Step
     public void clickEnterToAccountButton(){
         driver.findElement(enterToAccountButton).click();
     }
@@ -36,9 +40,11 @@ public class MainPage {
     public void clickBunTab(){
         driver.findElement(bunTab).click();
     }
+    @Step
     public void clickSaucesTab(){
         driver.findElement(saucesTab).click();
     }
+    @Step
     public void clickIngredientsTab(){
         driver.findElement(ingredientsTab).click();
     }
